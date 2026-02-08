@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Champa Elegance 1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --dark: #1b5e20;
+            --light: #f1f8e9;
+            --gray: #666;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        .product-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .thumbnails {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 5px 0;
+        }
+        .thumb {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border: 2px solid transparent;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: border 0.3s;
+        }
+        .thumb.active {
+            border-color: var(--primary);
+        }
+        .main-image {
+            width: 100%;
+            max-height: 650px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .product-info {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .product-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #222;
+        }
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        .tax-note {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        .size-selector {
+            margin: 20px 0;
+        }
+        .size-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .sizes {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .size-btn {
+            padding: 8px 14px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .size-btn:hover, .size-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .high-demand {
+            background: #fff3e0;
+            color: #ef6c00;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin: 15px 0;
+        }
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 25px 0;
+        }
+        .btn {
+            padding: 14px;
+            text-align: center;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+        }
+        .btn-whatsapp {
+            background: #25d366;
+            color: white;
+        }
+        .btn-whatsapp:hover {
+            background: #1da851;
+        }
+        .btn-cart {
+            background: white;
+            color: #333;
+            border: 2px solid #333;
+        }
+        .btn-cart:hover {
+            background: #333;
+            color: white;
+        }
+        .btn-buy {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-buy:hover {
+            background: var(--dark);
+        }
+        .details {
+            margin-top: 30px;
+        }
+        .details h3 {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: #222;
+        }
+        .details ul {
+            list-style: none;
+        }
+        .details li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .details li strong {
+            color: #222;
+        }
+        .accordion {
+            margin-top: 30px;
+        }
+        .accordion-item {
+            border-bottom: 1px solid #ddd;
+        }
+        .accordion-header {
+            padding: 15px 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+        .accordion-header i {
+            transition: transform 0.3s;
+        }
+        .accordion-header.active i {
+            transform: rotate(180deg);
+        }
+        .accordion-body {
+            padding: 0 0 15px;
+            display: none;
+            color: var(--gray);
+        }
+        .accordion-body.show {
+            display: block;
+        }
+        .share {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        .share a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .product-title {
+                font-size: 1.5rem;
+            }
+            .thumbnails {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Gallery -->
+        <div class="product-gallery">
+            <div class="thumbnails">
+                <img src="Champa/ce1.png" class="thumb active" onclick="changeMain(this)">
+                <img src="Champa/ce1.png" class="thumb" onclick="changeMain(this)">
+                <img src="Champa/ce1.png" class="thumb" onclick="changeMain(this)">
+                <img src="Champa/ce1.png" class="thumb" onclick="changeMain(this)">
+            </div>
+            <img src="Champa/ce1.png" class="main-image" id="mainImg" alt="Champa Elegance 1">
+        </div>
+
+        <!-- Product Info -->
+        <div class="product-info">
+            <h1 class="product-title">CHAMPA ELEGANCE 1</h1>
+            <div class="price">RS 149,900.00</div>
+            <div class="tax-note">Tax included. Shipping calculated at checkout.</div>
+
+            <div class="size-selector">
+                <label class="size-label">Size: <a href="#" style="font-weight:normal;font-size:0.9rem;">Size Chart</a></label>
+                <div class="sizes">
+                    <div class="size-btn active">XS</div>
+                    <div class="size-btn">S</div>
+                    <div class="size-btn">M</div>
+                    <div class="size-btn">L</div>
+                    <div class="size-btn">XL</div>
+                    <div class="size-btn">2XL</div>
+                </div>
+            </div>
+
+            <div class="high-demand">
+                Due To High Demand, Orders Will Be Shipped After 75 Days Of Placement.
+            </div>
+
+            <div class="buttons">
+                <button class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> ORDER VIA WHATSAPP
+                </button>
+                <button class="btn btn-cart">ADD TO CART</button>
+                <button class="btn btn-buy" onclick="window.location.href='checkout-ce1.html'">BUY IT NOW</button>
+            </div>
+
+            <div class="details">
+                <ul>
+                    <li>• Raw Silk olive Printed Lehenga highlighted with Dabka and Sequin embroidery paired with hand embroidered Raw silk Blouse with mukashi net dupatta</li>
+                    <li><strong>Color:</strong> Olive</li>
+                    <li><strong>Embroidery Details:</strong> Dabka and Sequin Embroidery</li>
+                    <li><strong>No. of Components:</strong> Set of 3</li>
+                    <li><strong>Dispatch Timeline:</strong> 6-8 Weeks</li>
+                    <li><strong>Wash Care:</strong> Dry Clean Only</li>
+                </ul>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">MANUFACTURER & PACKINGS <i class="fas fa-chevron-down"></i></div>
+                    <div class="accordion-body">Handcrafted in India with premium packaging.</div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">COUNTRY OF ORIGIN <i class="fas fa-chevron-down"></i></div>
+                    <div class="accordion-body">India</div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">CUSTOMER SUPPORT <i class="fas fa-chevron-down"></i></div>
+                    <div class="accordion-body">Email: support@aaranyacouture.com | Phone: +91 98765 43210</div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">SHIPPING <i class="fas fa-chevron-down"></i></div>
+                    <div class="accordion-body">Free shipping across India. International shipping available.</div>
+                </div>
+            </div>
+
+            <div class="share">
+                SHARE <a href="#">↗</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Change main image on thumbnail click
+        function changeMain(thumb) {
+            document.getElementById('mainImg').src = thumb.src;
+            document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+        }
+
+        // Size selector
+        document.querySelectorAll('.size-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Accordion
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const body = header.nextElementSibling;
+                const icon = header.querySelector('i');
+                header.classList.toggle('active');
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+                body.classList.toggle('show');
+            });
+        });
+
+        // WhatsApp order (replace with your number)
+        document.querySelector('.btn-whatsapp').addEventListener('click', () => {
+            const number = "+919876543210"; // Change to actual WhatsApp number
+            const message = "Hi, I'm interested in the Champa Elegance 1 (RS 149,900).";
+            window.open(`https://wa.me/${number}?text=${encodeURIComponent(message)}`, '_blank');
+        });
+    </script>
+</body>
+</html>

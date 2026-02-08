@@ -1,0 +1,4 @@
+- [x] Create index.html with HTML structure for all sections
+- [x] Add images to relevant sections (rr1.png, rr2.png, rr3.png for Raat Ki Rani, silsila.png for Silsila)
+- [x] Create style.css for basic styling
+- [x] Verify the HTML site by opening in browser

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raat Ki Rani - AaRANYA Couture</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #111;
+      background: url("Raat KI Rani/r-back.jpg") center/cover no-repeat;
+    }
+    .hero {
+      height: 100vh;
+      background-image: url("Index/Raat ki Rani.png");
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .overlay {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 40px;
+      border-radius: 10px;
+      color: #fff;
+    }
+    .overlay h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+    .overlay p {
+      font-size: 1.2em;
+      max-width: 600px;
+      margin: auto;
+    }
+    .back-btn {
+      position: absolute;
+      top: 20px; left: 20px;
+      background: #a37b59;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    .back-btn:hover { background: #8a5a3d; }
+    .gallery {
+      padding: 80px 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .gallery h2 {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5em;
+      margin-bottom: 40px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .gallery-item {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      width: 100%;
+    }
+    .gallery-item:hover {
+      transform: translateY(-5px);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+    }
+    .gallery-item .content {
+      padding: 20px;
+      text-align: center;
+    }
+    .gallery-item h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .gallery-item p {
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <button class="back-btn" onclick="window.location.href='collection.html'">Back to Collections</button>
+    <div class="overlay">
+      <h1>Raat Ki Rani</h1>
+      <p>Enchanting night blooms that capture the essence of midnight elegance.</p>
+      <button onclick="window.location.href='raat-ki-rani-all.html'" style="margin-top:20px;padding:10px 25px;border:none;background:#a37b59;color:#fff;font-size:1em;border-radius:5px;cursor:pointer;">View All</button>
+    </div>
+  </section>
+
+  <div class="gallery">
+    <h2>Raat Ki Rani Collection</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="Raat KI Rani/r1.png" alt="Raat Ki Rani Design 1">
+        <div class="content">
+          <h3>Raat Ki Rani Elegance</h3>
+          <p>Midnight blooms with intricate thread work and shimmering sequins.</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Raat KI Rani/r2.png" alt="Raat Ki Rani Design 2">
+        <div class="content">
+          <h3>Raat Ki Rani Grace</h3>
+          <p>Subtle patterns inspired by the night queen flower.</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Raat KI Rani/r3.png" alt="Raat Ki Rani Design 3">
+        <div class="content">
+          <h3>Raat Ki Rani Bloom</h3>
+          <p>Delicate florals that bloom under the moonlight.</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Raat KI Rani/r4.png" alt="Raat Ki Rani Design 4">
+        <div class="content">
+          <h3>Raat Ki Rani Radiance</h3>
+          <p>Elegant designs with premium zari and craftsmanship.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

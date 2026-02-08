@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Stylist - AaRANYA Couture</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #333;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(15px);
+      padding: 20px 40px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid rgba(163, 123, 89, 0.2);
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2em;
+      letter-spacing: 3px;
+      margin: 0;
+      color: #a37b59;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    nav a {
+      margin: 0 20px;
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 50%;
+      background: #a37b59;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+      left: 0;
+    }
+
+    nav a:hover {
+      color: #a37b59;
+      transform: translateY(-2px);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 120px 40px 60px;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 3rem;
+      color: #a37b59;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 60px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(45deg, #a37b59, #8b5a3c);
+      border-radius: 2px;
+    }
+
+    .body-shape-selector {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+    }
+
+    .body-shape {
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      background: white;
+      padding: 10px;
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .body-shape::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(163, 123, 89, 0.1), rgba(139, 90, 60, 0.1));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .body-shape:hover::before {
+      opacity: 1;
+    }
+
+    .body-shape:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    .body-shape img {
+      width: 80px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 15px;
+      transition: transform 0.3s;
+    }
+
+    .body-shape:hover img {
+      transform: scale(1.05);
+    }
+
+    .body-shape p {
+      margin: 8px 0 0;
+      font-weight: 600;
+      color: #555;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+
+    .measurement-section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 25px;
+      padding: 40px;
+      margin-bottom: 60px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .measurement-section h3 {
+      font-size: 1.8rem;
+      color: #a37b59;
+      margin-bottom: 30px;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .measurement-grid {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      flex-wrap: wrap;
+    }
+
+    .measurement-item {
+      text-align: center;
+    }
+
+    .measurement-item label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+      font-size: 0.9rem;
+    }
+
+    .measurement-item input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 1rem;
+      transition: all 0.3s;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .measurement-item input:focus {
+      outline: none;
+      border-color: #a37b59;
+      box-shadow: 0 0 10px rgba(163, 123, 89, 0.3);
+      background: white;
+    }
+
+    .calculate-btn {
+      display: block;
+      margin: 0 auto;
+      padding: 15px 40px;
+      background: linear-gradient(45deg, #a37b59, #8b5a3c);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 15px rgba(163, 123, 89, 0.3);
+    }
+
+    .calculate-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(163, 123, 89, 0.5);
+    }
+
+    .body-shape-result {
+      margin-top: 60px;
+      display: none;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 25px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .body-shape-result h3 {
+      font-size: 2rem;
+      color: #a37b59;
+      margin-bottom: 30px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .body-shape-result img {
+      width: 250px;
+      height: 300px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s;
+    }
+
+    .body-shape-result img:hover {
+      transform: scale(1.05);
+    }
+
+    .style-guide {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5px);
+    }
+
+    .style-guide h4 {
+      color: #a37b59;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+    }
+
+    .style-guide ul {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+
+    .style-guide li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .style-guide p {
+      margin: 10px 0;
+      line-height: 1.6;
+    }
+
+    .style-guide strong {
+      color: #a37b59;
+    }
+
+    .skin-tone-section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 25px;
+      padding: 40px;
+      margin-bottom: 60px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .skin-tone-section h3 {
+      font-size: 2.5rem;
+      color: #a37b59;
+      margin-bottom: 20px;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .skin-tone-section > p {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .tone-analysis {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 40px;
+      align-items: flex-start;
+    }
+
+    .analysis-content {
+      flex: 1;
+    }
+
+    .analysis-content h4 {
+      color: #a37b59;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .test-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .step {
+      background: rgba(163, 123, 89, 0.1);
+      padding: 20px;
+      border-radius: 15px;
+      border-left: 4px solid #a37b59;
+    }
+
+    .step h5 {
+      color: #a37b59;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .step p {
+      margin: 5px 0;
+      line-height: 1.5;
+    }
+
+    .enlarge-text {
+      text-align: center;
+      font-weight: 600;
+      margin: 20px 0 10px;
+      color: #555;
+    }
+
+    .check-tone-img {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: transform 0.3s;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .check-tone-img:hover {
+      transform: scale(1.05);
+    }
+
+    .reference-images {
+      margin-bottom: 40px;
+    }
+
+    .reference-images h4 {
+      text-align: center;
+      color: #a37b59;
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .tone-references {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .tone-ref {
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .tone-ref:hover {
+      transform: translateY(-5px);
+    }
+
+    .tone-ref img {
+      width: 150px;
+      height: 200px;
+      border-radius: 15px;
+      object-fit: cover;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+    }
+
+    .tone-ref img:hover {
+      transform: scale(1.05);
+    }
+
+    .tone-ref p {
+      margin-top: 10px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .color-suggestions {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5px);
+    }
+
+    .color-suggestion-content {
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+    }
+
+    .color-suggestion-content img {
+      width: 300px;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .color-details {
+      flex: 1;
+    }
+
+    .color-details h4 {
+      color: #a37b59;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .color-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .color-item {
+      background: rgba(163, 123, 89, 0.1);
+      padding: 8px 12px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .color-details p {
+      margin: 10px 0;
+      line-height: 1.6;
+    }
+
+    .color-details strong {
+      color: #a37b59;
+    }
+
+    /* Modal for enlarged images */
+    .image-modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 15px;
+    }
+
+    .image-modal .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .chat-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(45deg, #a37b59, #8b5a3c);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(163, 123, 89, 0.4);
+      transition: all 0.3s;
+      z-index: 1000;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 6px 20px rgba(163, 123, 89, 0.4);
+      }
+      50% {
+        box-shadow: 0 6px 20px rgba(163, 123, 89, 0.6), 0 0 0 10px rgba(163, 123, 89, 0.1);
+      }
+      100% {
+        box-shadow: 0 6px 20px rgba(163, 123, 89, 0.4);
+      }
+    }
+
+    .chat-button:hover {
+      transform: scale(1.1);
+    }
+
+    .chat-window {
+      position: fixed;
+      bottom: 110px;
+      right: 30px;
+      width: 380px;
+      height: 550px;
+      background: white;
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      display: none;
+      z-index: 999;
+      overflow: hidden;
+      animation: slideUp 0.4s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .chat-header {
+      background: linear-gradient(45deg, #a37b59, #8b5a3c);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 25px 25px 0 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .chat-header::after {
+      content: '✨';
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      font-size: 1.5rem;
+    }
+
+    .chat-body {
+      padding: 25px;
+      height: 400px;
+      overflow-y: auto;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 247, 250, 0.9) 100%);
+    }
+
+    .message {
+      margin-bottom: 20px;
+      padding: 15px 20px;
+      border-radius: 20px;
+      max-width: 80%;
+      animation: fadeIn 0.3s ease;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .message.bot {
+      background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+      align-self: flex-start;
+      border-bottom-left-radius: 5px;
+    }
+
+    .message.user {
+      background: linear-gradient(45deg, #a37b59, #8b5a3c);
+      color: white;
+      align-self: flex-end;
+      margin-left: auto;
+      border-bottom-right-radius: 5px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .chat-input {
+      padding: 20px;
+      background: white;
+      border-top: 1px solid #eee;
+      display: flex;
+      gap: 10px;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 12px 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 25px;
+      outline: none;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .chat-input input:focus {
+      border-color: #a37b59;
+    }
+
+    .chat-input button {
+      background: linear-gradient(45deg, #a37b59, #8b5a3c);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chat-input button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 15px rgba(163, 123, 89, 0.4);
+    }
+
+    footer {
+      background: linear-gradient(45deg, #333, #222);
+      color: #fff;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 60px;
+      position: relative;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(45deg, #a37b59, #8b5a3c);
+    }
+
+    footer p {
+      margin: 0 0 15px;
+      font-size: 1rem;
+    }
+
+    footer a {
+      color: #a37b59;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: #8b5a3c;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 100px 20px 40px;
+      }
+
+      h2 {
+        font-size: 2.5rem;
+      }
+
+      .body-shape-selector {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+      }
+
+      .chat-window {
+        width: 90%;
+        max-width: 350px;
+        right: 5%;
+      }
+
+      .measurement-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AaRANYA Couture</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#collections">Collections</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Select Your Body Shape</h2>
+
+    <div class="body-shape-selector">
+      <div class="body-shape" onclick="selectBodyShape('hourglass')">
+        <img src="body/hourglass.jpg" alt="Hourglass">
+        <p>Hourglass</p>
+      </div>
+      <div class="body-shape" onclick="selectBodyShape('pear')">
+        <img src="body/pear.jpg" alt="Pear">
+        <p>Pear</p>
+      </div>
+      <div class="body-shape" onclick="selectBodyShape('apple')">
+        <img src="body/apple.jpg" alt="Apple">
+        <p>Apple</p>
+      </div>
+      <div class="body-shape" onclick="selectBodyShape('rectangle')">
+        <img src="body/rectangle.jpg" alt="Rectangle">
+        <p>Rectangle</p>
+      </div>
+      <div class="body-shape" onclick="selectBodyShape('inverted-triangle')">
+        <img src="body/Inverted triangle.jpg" alt="Inverted Triangle">
+        <p>Inverted Triangle</p>
+      </div>
+    </div>
+
+    <div class="measurement-section">
+      <h3>Or Enter Your Measurements (in inches)</h3>
+      <div class="measurement-grid">
+        <div class="measurement-item">
+          <label for="bust">Bust</label>
+          <input type="number" id="bust" placeholder="e.g. 34">
+        </div>
+        <div class="measurement-item">
+          <label for="waist">Waist</label>
+          <input type="number" id="waist" placeholder="e.g. 28">
+        </div>
+        <div class="measurement-item">
+          <label for="hips">Hips</label>
+          <input type="number" id="hips" placeholder="e.g. 38">
+        </div>
+        <div class="measurement-item">
+          <label for="height">Height (ft)</label>
+          <input type="number" id="height" step="0.1" placeholder="e.g. 5.6">
+        </div>
+      </div>
+      <button class="calculate-btn" onclick="calculateBodyShape()">Calculate My Body Shape</button>
+    </div>
+
+    <!-- Body Shape Result Display -->
+    <div id="bodyShapeResult" class="body-shape-result">
+      <h3>Your Body Shape: <span id="shapeName"></span></h3>
+      <img id="shapeImage" src="" alt="Body Shape">
+      <div id="styleGuide" class="style-guide" style="margin-top: 20px; text-align: left;"></div>
+    </div>
+
+    <!-- Skin Tone Analysis Section -->
+    <div class="skin-tone-section">
+      <h3>Skin Tone Analysis – Discover Your Perfect Colour Palette</h3>
+      <p>Let your skin glow like never before. We'll help you find your undertone in 30 seconds and show exactly which colours will make you look radiant on your big day.</p>
+
+      <div class="tone-analysis">
+        <div class="analysis-content">
+          <h4>How to Find Your Undertone – 3 Simple Steps</h4>
+          <div class="test-steps">
+            <div class="step">
+              <h5>Jewellery Test</h5>
+              <p>Stand in natural daylight. Wear gold earrings, then silver. Which one makes your face glow instantly?</p>
+              <p>→ Gold = Warm | Silver = Cool | Both look good = Neutral</p>
+            </div>
+            <div class="step">
+              <h5>Vein Test</h5>
+              <p>Look at the veins on your inner wrist.</p>
+              <p>→ Greenish veins = Warm</p>
+              <p>→ Bluish/purple veins = Cool</p>
+              <p>→ Mix of both or hard to tell = Neutral</p>
+            </div>
+            <div class="step">
+              <h5>Sun Test</h5>
+              <p>When you go out in the sun, does your skin:</p>
+              <p>→ Tan easily & turn golden = Warm</p>
+              <p>→ Burn first, then tan slowly = Cool</p>
+              <p>→ Tan evenly without burning = Neutral</p>
+            </div>
+          </div>
+          <p class="enlarge-text">Click the image below to enlarge and compare</p>
+          <img src="body/check-tone.png" alt="Check Your Tone" class="check-tone-img" onclick="enlargeImage(this)">
+        </div>
+      </div>
+
+      <div class="reference-images">
+        <h4>Click Your Undertone Below & Unlock Your Personal Bridal Palette</h4>
+        <div class="tone-references">
+          <div class="tone-ref" onclick="selectUndertone('warm')">
+            <img src="body/warm.png" alt="Warm undertone" onclick="enlargeImage(this)">
+            <p>Golden skin with yellowish undertones, tans easily, green veins, gold jewelry looks great</p>
+          </div>
+          <div class="tone-ref" onclick="selectUndertone('cool')">
+            <img src="body/cool.png" alt="Cool undertone" onclick="enlargeImage(this)">
+            <p>Pinkish or bluish skin tone, burns in sun, blue veins, silver jewelry looks great</p>
+          </div>
+          <div class="tone-ref" onclick="selectUndertone('neutral')">
+            <img src="body/neutral.png" alt="Neutral undertone" onclick="enlargeImage(this)">
+            <p>Beige or olive skin tone, tans evenly, mixed veins, both gold and silver jewelry work</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="colorSuggestions" class="color-suggestions" style="display: none;">
+        <!-- Dynamic content will be inserted here -->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Floating Chat Button -->
+  <div id="chatButton" onclick="toggleChat()" style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #a37b59; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1000;">
+    <i class="fas fa-comments" style="color: white; font-size: 24px;"></i>
+  </div>
+
+  <!-- AI Concierge Chat -->
+  <div id="chatWindow" style="position: fixed; bottom: 90px; right: 20px; width: 350px; height: 500px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: none; z-index: 999; overflow: hidden;">
+    <div class="chat-header" style="background: #a37b59; color: white; padding: 15px; text-align: center; border-radius: 20px 20px 0 0; font-size: 1.1rem;">Your Royal Stylist ✨</div>
+    <div class="chat-body" id="chatBody" style="padding: 20px; height: 380px; overflow-y: auto; background: rgba(255,255,255,0.9);">
+      <div class="message bot">Namaste! I am your AI Couture Concierge. Select your body shape and upload a selfie for perfect fit & glow recommendations!</div>
+      <input type="file" id="selfieUpload" accept="image/*" style="margin:10px 0; padding: 8px; border: 1px solid #ddd; border-radius: 5px; width: 100%; box-sizing: border-box;">
+      <button onclick="scanSelfie()" style="background:#a37b59;color:white;padding:10px 20px;border:none;border-radius:30px;cursor:pointer;width: 100%;margin-top: 10px;">Scan Me</button>
+    </div>
+    <div class="chat-input" style="padding: 15px; background: white; border-top: 1px solid #eee; display: flex;">
+      <input type="text" placeholder="Ask about any collection..." id="userInput" onkeypress="if(event.key==='Enter') sendMessage()" style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 20px; outline: none;">
+      <button onclick="sendMessage()" style="background: #a37b59; color: white; border: none; width: 40px; border-radius: 50%; margin-left: 10px; cursor: pointer;"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 AaRANYA Couture. All Rights Reserved.</p>
+    <p>
+      <a href="#">Instagram</a> |
+      <a href="#">Facebook</a> |
+      <a href="#">Pinterest</a>
+    </p>
+  </footer>
+
+  <script>
+    let selectedBodyShape = '';
+    let selectedUndertone = '';
+
+    function selectBodyShape(shape) {
+      selectedBodyShape = shape;
+      // Highlight selected shape
+      document.querySelectorAll('.body-shape').forEach(el => {
+        el.style.border = '2px solid #ddd';
+        el.style.transform = 'scale(1)';
+      });
+      event.target.closest('.body-shape').style.border = '2px solid #a37b59';
+      event.target.closest('.body-shape').style.transform = 'scale(1.05)';
+      addMessage(`Body shape selected: ${shape.charAt(0).toUpperCase() + shape.slice(1)}`, 'user');
+    }
+
+    function enlargeImage(img) {
+      const modal = document.createElement('div');
+      modal.className = 'image-modal';
+      modal.innerHTML = `
+        <span class="close" onclick="this.parentElement.style.display='none'">&times;</span>
+        <img src="${img.src}" alt="${img.alt}">
+      `;
+      document.body.appendChild(modal);
+      modal.style.display = 'flex';
+      modal.onclick = function(event) {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      };
+    }
+
+    function selectUndertone(tone) {
+      selectedUndertone = tone;
+      // Highlight selected undertone
+      document.querySelectorAll('.tone-ref').forEach(el => {
+        el.style.transform = 'scale(1)';
+        el.style.opacity = '1';
+      });
+      event.target.closest('.tone-ref').style.transform = 'scale(1.05)';
+      event.target.closest('.tone-ref').style.opacity = '0.8';
+
+      displayColorSuggestions(tone);
+      addMessage(`Undertone selected: ${tone.charAt(0).toUpperCase() + tone.slice(1)}`, 'user');
+    }
+
+    function displayColorSuggestions(tone) {
+      const suggestionsDiv = document.getElementById('colorSuggestions');
+      let content = '';
+
+      switch(tone) {
+        case 'warm':
+          content = `
+            <div class="color-suggestion-content">
+              <img src="body/warm-color.png" alt="Warm Colors">
+              <div class="color-details">
+                <h4>If you selected WARM undertone (the golden-hour humans)</h4>
+                <p><strong>Colours that make you GLOW:</strong></p>
+                <p>Rich, spicy shades that look like they were dipped in sunset:</p>
+                <div class="color-list">
+                  <div class="color-item">Olive green</div>
+                  <div class="color-item">Mustard yellow</div>
+                  <div class="color-item">Burnt orange</div>
+                  <div class="color-item">Terracotta</div>
+                  <div class="color-item">Rust</div>
+                  <div class="color-item">Crimson red</div>
+                  <div class="color-item">Maroon</div>
+                </div>
+                <p>Fruity, juicy tones that make your skin look like it's been kissed by the sun:</p>
+                <div class="color-list">
+                  <div class="color-item">Peach</div>
+                  <div class="color-item">Coral</div>
+                  <div class="color-item">Warm coral-pink (think ripe mango flesh)</div>
+                  <div class="color-item">Paprika</div>
+                </div>
+                <p>Metallics that scream "Diwali lights": Earthy gold, rose gold, bronze, antique gold</p>
+                <p><strong>Avoid:</strong> Anything that belongs in a snow globe – icy blue, ash grey, stark white, cool lavender, mint green. They'll wash you out faster than a cheap dupatta in first rain.</p>
+                <p><strong>Best fabrics:</strong></p>
+                <ul>
+                  <li>Raw silk that catches every ray of light</li>
+                  <li>Tissue sarees that shimmer like molten jalebi</li>
+                  <li>Brocade with heavy gold zari</li>
+                  <li>Banarasi weaves in warm tones</li>
+                  <li>Velvet (yes, you can pull off velvet in Indian weddings without looking like a sofa)</li>
+                  <li>Anything with gota-patti or muted mirror work in gold</li>
+                </ul>
+                <p><strong>Fun fact:</strong> Warm-toned people are literally built for Indian weddings. While cool-toned folks are sweating in pastel lehengas looking like they lost a bet, you walk in wearing marigold-yellow or rust-orange and suddenly the entire shaadi playlist switches to "London Thumakda." Even the tubelight at the venue gives you a golden glow. That's why every second Bollywood bride (hello Alia, hello Anushka) secretly prays for warm undertones before saying "qabool hai"!</p>
+              </div>
+            </div>
+          `;
+          break;
+        case 'cool':
+          content = `
+            <div class="color-suggestion-content">
+              <img src="body/cool-color.png" alt="Cool Colors">
+              <div class="color-details">
+                <h4>If you selected COOL undertone</h4>
+                <p><strong>Colours that make you GLOW:</strong></p>
+                <p>Jewel tones that look like they were stolen from a royal treasure chest:</p>
+                <div class="color-list">
+                  <div class="color-item">Emerald green</div>
+                  <div class="color-item">Sapphire blue</div>
+                  <div class="color-item">Amethyst purple</div>
+                  <div class="color-item">Ruby red</div>
+                  <div class="color-item">Teal</div>
+                </div>
+                <p>Crisp, icy shades that make your skin look like fresh snow:</p>
+                <div class="color-list">
+                  <div class="color-item">Icy blue</div>
+                  <div class="color-item">Mint green</div>
+                  <div class="color-item">Lavender</div>
+                  <div class="color-item">Cool pink (think strawberry milkshake)</div>
+                  <div class="color-item">True grey</div>
+                </div>
+                <p>Metallics that shimmer like moonlight: Silver, platinum, white gold</p>
+                <p><strong>Avoid:</strong> Anything that screams "autumn bonfire" – mustard yellow, olive green, burnt orange, terracotta, rust, warm golds. They'll make you look sallow or tired.</p>
+                <p><strong>Best fabrics:</strong></p>
+                <ul>
+                  <li>Cool-silky satins</li>
+                  <li>Chiffon</li>
+                  <li>Georgette</li>
+                  <li>Crepe</li>
+                  <li>Organza with silver/zari threads</li>
+                  <li>Anything that catches light like water (think mirror-work or sequins in silver tones)</li>
+                </ul>
+                <p><strong>Fun fact:</strong> Cool-toned people were literally born to wear the colors of a winter sunrise – those blues and purples that only exist for 10 minutes at dawn. That's why Bollywood queens like Deepika and Sonam look ethereal in icy blues and silvers on red carpets!</p>
+              </div>
+            </div>
+          `;
+          break;
+        case 'neutral':
+          content = `
+            <div class="color-suggestion-content">
+              <img src="body/neutral-color.png" alt="Neutral Colors">
+              <div class="color-details">
+                <h4>If you selected NEUTRAL undertone (the lucky unicorns)</h4>
+                <p><strong>Colours that make you GLOW:</strong></p>
+                <p>You’re the "works-with-everything" undertone – basically the human version of a white canvas bag that matches every outfit.</p>
+                <p>Warm side? Rock camel, cream, taupe, soft peach, warm ivory.</p>
+                <p>Cool side? Nail dove grey, soft rose, off-white, mauve.</p>
+                <p>True neutral magic:</p>
+                <div class="color-list">
+                  <div class="color-item">Soft blush pink</div>
+                  <div class="color-item">Sage green</div>
+                  <div class="color-item">Taupe</div>
+                  <div class="color-item">Champagne</div>
+                  <div class="color-item">Navy (yes, navy is neutral’s best friend)</div>
+                  <div class="color-item">Charcoal</div>
+                </div>
+                <p>Metallics: You can wear BOTH gold AND silver without committing crimes against fashion. Mix them like a boss.</p>
+                <p><strong>Avoid:</strong> Nothing, really. Just don’t go neon-overboard unless you want to look like a highlighter.</p>
+                <p><strong>Best fabrics:</strong></p>
+                <ul>
+                  <li>Pure silk</li>
+                  <li>Cotton-silk blends</li>
+                  <li>Linen</li>
+                  <li>Velvet (in jewel or earthy tones)</li>
+                  <li>Anything with subtle gold-silver dual zari (your undertone eats duality for breakfast)</li>
+                </ul>
+                <p><strong>Fun fact:</strong> Neutral undertones are so rare in India that makeup artists call you "the golden ticket." You’re the reason brands keep launching "medium neutral" shades and cry when they sell out first. Even Fair & Lovely wishes it had your range!</p>
+              </div>
+            </div>
+          `;
+          break;
+      }
+
+      suggestionsDiv.innerHTML = content;
+      suggestionsDiv.style.display = 'block';
+
+      // Show AI concierge message if both body shape and undertone are selected
+      if (selectedBodyShape && selectedUndertone) {
+        setTimeout(() => {
+          addMessage(`AI Concierge Magic Example: "Darling, with your ${selectedBodyShape.charAt(0).toUpperCase() + selectedBodyShape.slice(1)} shape and ${selectedUndertone.charAt(0).toUpperCase() + selectedUndertone.slice(1)} undertone, a circular-flare lehenga in olive green or rose gold with heavy shoulder dupatta will balance your silhouette and make your skin glow like pure gold. Ready to see pieces handpicked for you?"`, 'bot');
+        }, 1000);
+      }
+    }
+
+    function calculateBodyShape() {
+      const bust = parseFloat(document.getElementById('bust').value);
+      const waist = parseFloat(document.getElementById('waist').value);
+      const hips = parseFloat(document.getElementById('hips').value);
+      const height = parseFloat(document.getElementById('height').value);
+
+      if (!bust || !waist || !hips || !height) {
+        alert('Please fill in all measurements');
+        return;
+      }
+
+      let shape = 'rectangle'; // default
+
+      if (bust - hips <= 2 && hips - bust <= 2 && bust - waist >= 7 && hips - waist >= 7) {
+        shape = 'hourglass';
+      } else if (hips - bust >= 3.6 && hips - waist >= 9) {
+        shape = 'pear';
+      } else if (bust - hips >= 3.6 && bust - waist < 9) {
+        shape = 'apple';
+      } else if (bust - hips >= 3.6 && hips - waist < 9) {
+        shape = 'inverted-triangle';
+      }
+
+      selectedBodyShape = shape;
+
+      // Display result
+      const resultDiv = document.getElementById('bodyShapeResult');
+      const shapeNameSpan = document.getElementById('shapeName');
+      const shapeImage = document.getElementById('shapeImage');
+
+      shapeNameSpan.textContent = shape.charAt(0).toUpperCase() + shape.slice(1);
+      shapeImage.src = `body/${shape}.jpg`;
+      displayStyleGuide(shape);
+      resultDiv.style.display = 'block';
+
+      addMessage(`Calculated body shape: ${shape.charAt(0).toUpperCase() + shape.slice(1)} (Bust: ${bust}", Waist: ${waist}", Hips: ${hips}", Height: ${height}ft)`, 'user');
+
+      // Highlight the calculated shape
+      document.querySelectorAll('.body-shape').forEach(el => {
+        el.style.border = '2px solid #ddd';
+        el.style.transform = 'scale(1)';
+      });
+      const shapeElements = document.querySelectorAll('.body-shape');
+      const shapeIndex = ['hourglass', 'pear', 'apple', 'rectangle', 'inverted-triangle'].indexOf(shape);
+      if (shapeIndex !== -1) {
+        shapeElements[shapeIndex].style.border = '2px solid #a37b59';
+        shapeElements[shapeIndex].style.transform = 'scale(1.05)';
+      }
+    }
+
+    function toggleChat() {
+      const chatWindow = document.getElementById('chatWindow');
+      chatWindow.style.display = chatWindow.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      if (!input.value) return;
+      addMessage(input.value, 'user');
+      setTimeout(() => {
+        if (input.value.toLowerCase().includes('raat ki rani')) {
+          addMessage('Darling, Raat Ki Rani in navy will make your warm undertone glow under moonlight! Price ₹1,54,900 – ₹3,49,900', 'bot');
+        } else {
+          addMessage('Tell me your skin tone or occasion, I’ll curate from all collections!', 'bot');
+        }
+      }, 1000);
+      input.value = '';
+    }
+    function addMessage(text, type) {
+      const div = document.createElement('div');
+      div.className = `message ${type}`;
+      div.textContent = text;
+      document.getElementById('chatBody').appendChild(div);
+      div.scrollIntoView();
+    }
+    function scanSelfie() {
+      const file = document.getElementById('selfieUpload').files[0];
+      if (!file) return alert('Please upload a selfie!');
+      if (!selectedBodyShape) return alert('Please select your body shape first!');
+      addMessage('Scanning your glow... ✨', 'bot');
+      setTimeout(() => {
+        addMessage(`Body: ${selectedBodyShape.charAt(0).toUpperCase() + selectedBodyShape.slice(1)} | Measurements: 34-28-38 | Undertone: Warm Autumn\nBest: Mehbooba Rose Gold & Silsila Lemon Yellow!\nVirtual try-on loading...`, 'bot');
+      }, 2000);
+    }
+
+    function displayStyleGuide(shape) {
+      const styleGuideDiv = document.getElementById('styleGuide');
+      let guide = '';
+
+      switch(shape) {
+        case 'hourglass':
+          guide = `
+            <h4>Lehenga Style Guide for Hourglass Figure</h4>
+            <p><strong>Most flattering styles:</strong></p>
+            <ul>
+              <li>Fish-cut / Mermaid lehenga – hugs the waist and flares dramatically below the knee → accentuates every curve beautifully.</li>
+              <li>A-line with a fitted or corset blouse – cinches the waist and flows gently, maintaining perfect balance.</li>
+              <li>High-waist lehenga with crop blouse – elongates the torso and proudly shows off the natural waist.</li>
+            </ul>
+            <p><strong>Avoid:</strong> Heavy multi-panel lehengas or thick belts that hide the waistline.</p>
+            <p><strong>Pro tip:</strong> Opt for vertical embroidery lines and medium flare to keep the hourglass harmony.</p>
+          `;
+          break;
+        case 'pear':
+          guide = `
+            <h4>Lehenga Style Guide for Pear Figure</h4>
+            <p><strong>Most flattering styles:</strong></p>
+            <ul>
+              <li>A-line or circular flare lehenga – starts narrow at the waist and flows wide → beautifully balances the hips.</li>
+              <li>Heavy dupatta draped over one shoulder – adds instant volume to the upper body.</li>
+              <li>Off-shoulder, boat-neck, or broad strap blouse – visually widens the shoulder line.</li>
+            </ul>
+            <p><strong>Avoid:</strong> Skinny fish-cut or straight pencil lehengas (they make hips appear heavier).</p>
+            <p><strong>Pro tip:</strong> Choose lighter embroidery on the skirt bottom and heavier work on the blouse/dupatta.</p>
+          `;
+          break;
+        case 'apple':
+          guide = `
+            <h4>Lehenga Style Guide for Apple Figure</h4>
+            <p><strong>Most flattering styles:</strong></p>
+            <ul>
+              <li>Empire-waist or high-waist lehenga – waistline sits just below the bust → hides the midriff and creates a long, lean line.</li>
+              <li>Jacket-style blouse, long anarkali blouse, or cape – gracefully covers the tummy area.</li>
+              <li>Double dupatta styling – one on the head, one draped around the waist → draws attention upward.</li>
+            </ul>
+            <p><strong>Avoid:</strong> Low-waist styles or heavy belts sitting directly on the tummy.</p>
+            <p><strong>Pro tip:</strong> Soft flowy fabrics like georgette, chiffon, or tissue work wonders.</p>
+          `;
+          break;
+        case 'rectangle':
+          guide = `
+            <h4>Lehenga Style Guide for Rectangle Figure</h4>
+            <p><strong>Most flattering styles:</strong></p>
+            <ul>
+              <li>Panel lehenga (6–12 kalis) – the panels create an illusion of curves.</li>
+              <li>Layered lehenga with can-can – adds volume and an hourglass shape.</li>
+              <li>Belted lehenga or peplum blouse – instantly defines a waistline.</li>
+            </ul>
+            <p><strong>Avoid:</strong> Straight-cut or pencil lehengas that keep the silhouette boxy.</p>
+            <p><strong>Pro tip:</strong> Ruffles, tiers, and horizontal borders near the waist help create curves.</p>
+          `;
+          break;
+        case 'inverted-triangle':
+          guide = `
+            <h4>Lehenga Style Guide for Inverted Triangle Figure</h4>
+            <p><strong>Most flattering styles:</strong></p>
+            <ul>
+              <li>Heavy double-flared or umbrella-cut lehenga – adds maximum volume below the waist.</li>
+              <li>Long trail or dramatic flare – balances the broader shoulder line.</li>
+              <li>V-neck, deep sweetheart, or halter blouse – softens and narrows the shoulder appearance.</li>
+            </ul>
+            <p><strong>Avoid:</strong> Puff sleeves, heavy shoulder embroidery, or capes that add bulk on top.</p>
+            <p><strong>Pro tip:</strong> Go for big border work and layered can-can to create lower-body drama.</p>
+          `;
+          break;
+      }
+
+      styleGuideDiv.innerHTML = guide;
+    }
+  </script>
+</body>
+</html>

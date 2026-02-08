@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Silsila - AaRANYA Couture</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #111;
+      background: url("Silsila/s-back.png") center/cover no-repeat;
+    }
+    .hero {
+      height: 100vh;
+      background-image: url("Index/Silsila.png");
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .overlay {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 40px;
+      border-radius: 10px;
+      color: #fff;
+    }
+    .overlay h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+    .overlay p {
+      font-size: 1.2em;
+      max-width: 600px;
+      margin: auto;
+    }
+    .back-btn {
+      position: absolute;
+      top: 20px; left: 20px;
+      background: #a37b59;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    .back-btn:hover { background: #8a5a3d; }
+    .gallery {
+      padding: 80px 40px;
+      max-width: 1200px;
+      margin: auto;
+      background: url("Silsila/s-back.png") center/cover no-repeat;
+    }
+    .gallery h2 {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5em;
+      margin-bottom: 40px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .gallery-item {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      width: 100%;
+    }
+    .gallery-item:hover {
+      transform: translateY(-5px);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+    }
+    .gallery-item .content {
+      padding: 20px;
+      text-align: center;
+    }
+    .gallery-item h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .gallery-item p {
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <button class="back-btn" onclick="window.location.href='collection.html'">Back to Collections</button>
+    <div class="overlay">
+      <h1>Silsila</h1>
+      <p>Traditional motifs with modern silhouettes in luxurious fabrics.</p>
+      <button onclick="window.location.href='silsila-all.html'" style="margin-top:20px;padding:10px 25px;border:none;background:#a37b59;color:#fff;font-size:1em;border-radius:5px;cursor:pointer;">View All</button>
+    </div>
+  </section>
+
+  <div class="gallery">
+    <h2>Silsila Collection</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="Silsila/s1.png" alt="Silsila Design 1">
+        <div class="content">
+          <h3>Silsila Elegance</h3>
+          <p>Intricate traditional motifs with modern silhouettes.</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Silsila/s2.png" alt="Silsila Design 2">
+        <div class="content">
+          <h3>Silsila Grace</h3>
+          <p>Subtle patterns blending tradition and contemporary style.</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Silsila/s3.png" alt="Silsila Design 3">
+        <div class="content">
+          <h3>Silsila Bloom</h3>
+          <p>Delicate embroidery inspired by heritage designs.</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Silsila/s4.png" alt="Silsila Design 4">
+        <div class="content">
+          <h3>Silsila Radiance</h3>
+          <p>Elegant patterns with premium zari work.</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Silsila/s5.png" alt="Silsila Design 5">
+        <div class="content">
+          <h3>Silsila Serenity</h3>
+          <p>Soft hues and gentle embroidery for timeless appeal.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Champa - AaRANYA Couture</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #111;
+      background: url("Champa/c-back.png") center/cover no-repeat;
+    }
+    .hero {
+      height: 100vh;
+      background-image: url("Index/Champa.png");
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .overlay {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 40px;
+      border-radius: 10px;
+      color: #fff;
+    }
+    .overlay h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+    .overlay p {
+      font-size: 1.2em;
+      max-width: 600px;
+      margin: auto;
+    }
+    .back-btn {
+      position: absolute;
+      top: 20px; left: 20px;
+      background: #a37b59;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    .back-btn:hover { background: #8a5a3d; }
+    .gallery {
+      padding: 80px 40px;
+      max-width: 1200px;
+      margin: auto;
+      background: url("Champa/c-back.png") center/cover no-repeat;
+    }
+    .gallery h2 {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5em;
+      margin-bottom: 40px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .gallery-item {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      width: 100%;
+    }
+    .gallery-item:hover {
+      transform: translateY(-5px);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+    }
+    .gallery-item .content {
+      padding: 20px;
+      text-align: center;
+    }
+    .gallery-item h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .gallery-item p {
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <button class="back-btn" onclick="window.location.href='collection.html'">Back to Collections</button>
+    <div class="overlay">
+      <h1>Champa</h1>
+      <p>Delicate florals and elegant patterns inspired by the fragrant champa flower.</p>
+      <button onclick="window.location.href='champa-all.html'" style="margin-top:20px;padding:10px 25px;border:none;background:#a37b59;color:#fff;font-size:1em;border-radius:5px;cursor:pointer;">View All</button>
+    </div>
+  </section>
+
+  <div class="gallery">
+    <h2>Champa Collection</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="Champa/c11.png" alt="Champa Design 1">
+        <div class="content">
+          <h3>Champa Elegance</h3>
+          <p>Intricate floral embroidery with delicate thread work.</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Champa/c12.png" alt="Champa Design 2">
+        <div class="content">
+          <h3>Champa Grace</h3>
+          <p>Subtle patterns and shimmering sequins for festive occasions.</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Champa/c13.png" alt="Champa Design 3">
+        <div class="content">
+          <h3>Champa Bloom</h3>
+          <p>Delicate florals inspired by the fragrant champa flower.</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Champa/c14.png" alt="Champa Design 4">
+        <div class="content">
+          <h3>Champa Radiance</h3>
+          <p>Elegant patterns with intricate zari work.</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Champa/c15.png" alt="Champa Design 5">
+        <div class="content">
+          <h3>Champa Serenity</h3>
+          <p>Soft hues and gentle embroidery for everyday elegance.</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Champa/c16.png" alt="Champa Design 6">
+        <div class="content">
+          <h3>Champa Majesty</h3>
+          <p>Royal designs with premium fabrics and craftsmanship.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

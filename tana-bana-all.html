@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Tana Bana Designs - AaRANYA Couture</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #111;
+      background: url("Tana Bana/t-back.jpg") center/cover no-repeat;
+    }
+    .hero {
+      height: 100vh;
+      background-image: url("Tana Bana/Tana_bana_main.png");
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .overlay {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 40px;
+      border-radius: 10px;
+      color: #fff;
+    }
+    .overlay h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+    .overlay p {
+      font-size: 1.2em;
+      max-width: 600px;
+      margin: auto;
+    }
+    .back-btn {
+      position: absolute;
+      top: 20px; left: 20px;
+      background: #a37b59;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    .back-btn:hover { background: #8a5a3d; }
+    .gallery {
+      padding: 80px 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .gallery h2 {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5em;
+      margin-bottom: 40px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .gallery-item {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .gallery-item:hover {
+      transform: translateY(-5px);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 600px;
+      object-fit: cover;
+    }
+    .gallery-item .content {
+      padding: 20px;
+      text-align: center;
+    }
+    .gallery-item h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .gallery-item p {
+      color: #666;
+      margin-bottom: 5px;
+    }
+    .gallery-item .price {
+      font-weight: bold;
+      color: #a37b59;
+      margin-bottom: 10px;
+    }
+    .buy-btn {
+      background: #a37b59;
+      color: #fff;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9em;
+    }
+    .buy-btn:hover { background: #8a5a3d; }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      overflow: auto;
+    }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      color: #aaa;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover { color: #000; }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <button class="back-btn" onclick="window.location.href='tana-bana.html'">Back to Tana Bana</button>
+    <div class="overlay">
+      <h1>All Tana Bana Designs</h1>
+      <p>Explore the complete collection of exquisite Tana Bana designs.</p>
+    </div>
+  </section>
+
+  <div class="gallery">
+    <h2>Tana Bana Collection</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="Tana Bana/te1.png" alt="Tana Bana Design 1">
+        <div class="content">
+          <h3>Tana Bana Elegance</h3>
+          <p>Intricate weaves with delicate thread work.</p>
+          <p class="price">RS 45,000.00</p>
+          <button class="buy-btn" onclick="window.location.href='checkout-te1.html'">Buy Now</button>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Tana Bana/te2.png" alt="Tana Bana Design 2">
+        <div class="content">
+          <h3>Tana Bana Grace</h3>
+          <p>Subtle patterns and shimmering sequins for festive occasions.</p>
+          <p class="price">RS 52,000.00</p>
+          <button class="buy-btn" onclick="window.location.href='checkout-te2.html'">Buy Now</button>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Tana Bana/te3.png" alt="Tana Bana Design 3">
+        <div class="content">
+          <h3>Tana Bana Bloom</h3>
+          <p>Delicate florals inspired by traditional motifs.</p>
+          <p class="price">RS 38,000.00</p>
+          <button class="buy-btn" onclick="window.location.href='checkout-te3.html'">Buy Now</button>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Tana Bana/te4.png" alt="Tana Bana Design 4">
+        <div class="content">
+          <h3>Tana Bana Radiance</h3>
+          <p>Elegant patterns with intricate zari work.</p>
+          <p class="price">RS 61,000.00</p>
+          <button class="buy-btn" onclick="window.location.href='checkout-te4.html'">Buy Now</button>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Tana Bana/te5.png" alt="Tana Bana Design 5">
+        <div class="content">
+          <h3>Tana Bana Serenity</h3>
+          <p>Soft hues and gentle embroidery for everyday elegance.</p>
+          <p class="price">RS 29,000.00</p>
+          <button class="buy-btn" onclick="window.location.href='checkout-te5.html'">Buy Now</button>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Tana Bana/te6.png" alt="Tana Bana Design 6">
+        <div class="content">
+          <h3>Tana Bana Majesty</h3>
+          <p>Royal designs with premium fabrics and craftsmanship.</p>
+          <p class="price">RS 55,000.00</p>
+          <button class="buy-btn" onclick="window.location.href='checkout-te6.html'">Buy Now</button>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Tana Bana/te7.png" alt="Tana Bana Design 7">
+        <div class="content">
+          <h3>Tana Bana Harmony</h3>
+          <p>Balanced patterns combining tradition and modernity.</p>
+          <p class="price">RS 42,000.00</p>
+          <button class="buy-btn" onclick="window.location.href='checkout-te7.html'">Buy Now</button>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Tana Bana/te8.png" alt="Tana Bana Design 8">
+        <div class="content">
+          <h3>Tana Bana Essence</h3>
+          <p>Capturing the pure essence of traditional beauty.</p>
+          <p class="price">RS 67,000.00</p>
+          <button class="buy-btn" onclick="window.location.href='checkout-te8.html'">Buy Now</button>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Tana Bana/te9.png" alt="Tana Bana Design 9">
+        <div class="content">
+          <h3>Tana Bana Splendor</h3>
+          <p>Luxurious designs for special occasions.</p>
+          <p class="price">RS 33,000.00</p>
+          <button class="buy-btn" onclick="window.location.href='checkout-te9.html'">Buy Now</button>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="Tana Bana/te10.png" alt="Tana Bana Design 10">
+        <div class="content">
+          <h3>Tana Bana Perfection</h3>
+          <p>The pinnacle of craftsmanship and elegance.</p>
+          <p class="price">RS 49,000.00</p>
+          <button class="buy-btn" onclick="window.location.href='checkout-te10.html'">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Buy Now Modal -->
+  <div id="buyModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <img src="Aa/Order_1.png" alt="Order Interface" style="width:100%;max-width:600px;">
+    </div>
+  </div>
+
+  <script>
+    function openModal() {
+      document.getElementById('buyModal').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('buyModal').style.display = 'none';
+    }
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      if (event.target == document.getElementById('buyModal')) {
+        closeModal();
+      }
+    }
+    // Attach event listeners to all buy buttons
+    document.addEventListener('DOMContentLoaded', function() {
+      const buyButtons = document.querySelectorAll('.buy-btn');
+      buyButtons.forEach(button => {
+        button.addEventListener('click', openModal);
+      });
+    });
+  </script>
+</body>
+</html>

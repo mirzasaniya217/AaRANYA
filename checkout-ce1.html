@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Champa Elegance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #87ceeb;
+            --dark: #4682b4;
+            --light: #e0f6ff;
+            --gray: #666;
+            --border: #ddd;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: url("Champa/c-back.png") center/cover no-repeat;
+            color: #333;
+            line-height: 1.6;
+        }
+        .hero-banner {
+            width: 100%;
+            height: 80vh;
+            background: url('Champa/ce1.png') center/cover no-repeat;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 40px;
+        }
+        .hero-text {
+            display: none;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        .product-summary {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+        .product-summary img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .product-summary h2 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+        .price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 15px 0;
+        }
+        .price-note {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        .size-selector, .quantity-selector {
+            margin: 20px 0;
+        }
+        .size-label, .qty-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .sizes {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .size-btn {
+            padding: 10px 16px;
+            border: 2px solid #ccc;
+            background: white;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        .size-btn.active, .size-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .quantity {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .quantity button {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #ccc;
+            background: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+        .quantity input {
+            width: 60px;
+            text-align: center;
+            padding: 8px;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        .total-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 25px 0;
+            text-align: right;
+        }
+        .checkout-form {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        .payment-options {
+            margin: 25px 0;
+        }
+        .payment-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .payment-option.active {
+            border-color: var(--primary);
+            background: var(--light);
+        }
+        .payment-option i {
+            font-size: 1.4rem;
+            margin-right: 12px;
+            color: var(--primary);
+        }
+        .btn {
+            padding: 16px;
+            text-align: center;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+        }
+        .btn-whatsapp {
+            background: #25d366;
+            color: white;
+            margin-top: 15px;
+        }
+        .btn-pay {
+            background: var(--primary);
+            color: white;
+            width: 100%;
+        }
+        .btn-pay:hover {
+            background: var(--dark);
+        }
+        .high-demand {
+            background: #fff3e0;
+            color: #ef6c00;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            text-align: center;
+            margin: 20px 0;
+        }
+        @media (max-width: 992px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .hero-banner {
+                height: 60vh;
+            }
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+        }
+        .nav-buttons {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.9);
+            color: #333;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .nav-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        @media (max-width: 576px) {
+            .hero-text h1 {
+                font-size: 1.8rem;
+            }
+            .hero-text p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+        <button class="nav-btn back-btn" onclick="window.history.back()">Back</button>
+        <a href="index.html" class="nav-btn home-btn">Home</a>
+    </div>
+
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+    </div>
+
+    <div class="container">
+        <!-- Product Summary -->
+        <div class="product-summary">
+            <img src="Champa/ce1.png" alt="Champa Elegance">
+            <h2>CHAMPA ELEGANCE</h2>
+            <div class="price">RS 149,900.00</div>
+            <div class="price-note">Tax included. Shipping calculated at checkout.</div>
+
+            <div class="size-selector">
+                <label class="size-label">Select Size</label>
+                <div class="sizes">
+                    <div class="size-btn active">XS</div>
+                    <div class="size-btn">S</div>
+                    <div class="size-btn">M</div>
+                    <div class="size-btn">L</div>
+                    <div class="size-btn">XL</div>
+                    <div class="size-btn">2XL</div>
+                </div>
+            </div>
+
+            <div class="quantity-selector">
+                <label class="qty-label">Quantity</label>
+                <div class="quantity">
+                    <button onclick="updateQty(-1)">−</button>
+                    <input type="number" id="qty" value="1" min="1" readonly>
+                    <button onclick="updateQty(1)">+</button>
+                </div>
+            </div>
+
+            <div class="high-demand">
+                Due To High Demand, Orders Will Be Shipped After 75 Days Of Placement.
+            </div>
+
+            <div class="total-price">Total: RS <span id="total">149,900</span>.00</div>
+        </div>
+
+        <!-- Checkout Form -->
+        <div class="checkout-form">
+            <h2>Shipping Address</h2>
+            <form id="checkoutForm">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" required placeholder="10-digit mobile number">
+                </div>
+                <div class="form-group">
+                    <label>Flat, House no., Building, Apartment *</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Area, Street, Sector, Village *</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Landmark (Optional)</label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>PIN Code *</label>
+                    <input type="text" maxlength="6" required>
+                </div>
+                <div class="form-group">
+                    <label>City *</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>State *</label>
+                    <select required>
+                        <option value="">Select State</option>
+                        <option>Maharashtra</option>
+                        <option>Delhi</option>
+                        <option>Karnataka</option>
+                        <option>Tamil Nadu</option>
+                        <!-- Add more -->
+                    </select>
+                </div>
+
+                <div class="payment-options">
+                    <h3>Payment Method</h3>
+                    <div class="payment-option active" onclick="selectPayment(this)">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <div>
+                            <strong>Cash on Delivery (COD)</strong><br>
+                            <small>Pay when you receive</small>
+                        </div>
+                    </div>
+                    <div class="payment-option" onclick="selectPayment(this)">
+                        <i class="fas fa-credit-card"></i>
+                        <div>
+                            <strong>Pay Online (Razorpay)</strong><br>
+                            <small>UPI, Cards, Net Banking</small>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-pay">
+                    <i class="fas fa-lock"></i> PLACE ORDER - RS 149,900
+                </button>
+
+                <button type="button" class="btn btn-whatsapp" onclick="orderViaWhatsApp()">
+                    <i class="fab fa-whatsapp"></i> Order via WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const price = 149900;
+        let quantity = 1;
+
+        function updateQty(change) {
+            quantity = Math.max(1, quantity + change);
+            document.getElementById('qty').value = quantity;
+            document.getElementById('total').textContent = (price * quantity).toLocaleString('en-IN');
+        }
+
+        document.querySelectorAll('.size-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        function selectPayment(el) {
+            document.querySelectorAll('.payment-option').forEach(p => p.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function orderViaWhatsApp() {
+            const size = document.querySelector('.size-btn.active').textContent;
+            const msg = `Hello! I'd like to order:\n\n*Champa Elegance*\nSize: ${size}\nQuantity: ${quantity}\nTotal: RS ${(price * quantity).toLocaleString('en-IN')}\n\nPlease confirm availability and payment link.`;
+            const number = "+919876543210"; // Change to your number
+            window.open(`https://wa.me/${number}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Order placed successfully! We will contact you shortly on WhatsApp.');
+            // Here you can integrate Razorpay or send data to backend
+        });
+    </script>
+</body>
+</html>
